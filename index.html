@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mubdie Offer Timer</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html,body{
+    width:100%;
+    overflow-x:hidden;
+    background:#fff;
+}
+
+body{
+    padding:15px;
+}
+
+.offer-box{
+    width:100%;
+    max-width:360px;
+    margin:auto;
+    text-align:center;
+}
+
+.offer-title{
+    font-size:30px;
+    font-weight:700;
+    color:#E53935;
+    line-height:1.35;
+    margin-bottom:22px;
+}
+
+.timer{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.time-box{
+    flex:1;
+    min-width:95px;
+    background:#8C52FF;
+    color:#fff;
+    border-radius:16px;
+    padding:18px 10px;
+    box-shadow:0 10px 22px rgba(140,82,255,.25);
+}
+
+.time{
+    font-size:42px;
+    font-weight:700;
+}
+
+.label{
+    margin-top:8px;
+    font-size:14px;
+    opacity:.95;
+}
+
+@media(max-width:380px){
+
+.offer-title{
+    font-size:26px;
+}
+
+.timer{
+    gap:8px;
+}
+
+.time-box{
+    min-width:82px;
+    padding:15px 8px;
+}
+
+.time{
+    font-size:36px;
+}
+
+.label{
+    font-size:13px;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<div class="offer-box">
+
+<div class="offer-title">
+🔥 ৳১,২৯০ অফার শেষ হতে বাকি
+</div>
+
+<div class="timer">
+
+<div class="time-box">
+<div id="hour" class="time">00</div>
+<div class="label">Hours</div>
+</div>
+
+<div class="time-box">
+<div id="minute" class="time">00</div>
+<div class="label">Minutes</div>
+</div>
+
+<div class="time-box">
+<div id="second" class="time">00</div>
+<div class="label">Seconds</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function updateTimer(){
+
+const now=new Date();
+
+const bdNow=new Date(
+now.toLocaleString("en-US",{timeZone:"Asia/Dhaka"})
+);
+
+let target=new Date(bdNow);
+
+target.setHours(2,0,0,0);
+
+if(bdNow>=target){
+target.setDate(target.getDate()+1);
+}
+
+const diff=target-bdNow;
+
+const h=Math.floor(diff/(1000*60*60));
+const m=Math.floor((diff%(1000*60*60))/(1000*60));
+const s=Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("hour").textContent=String(h).padStart(2,"0");
+document.getElementById("minute").textContent=String(m).padStart(2,"0");
+document.getElementById("second").textContent=String(s).padStart(2,"0");
+
+}
+
+updateTimer();
+
+setInterval(updateTimer,1000);
+
+</script>
+
+</body>
+</html>
